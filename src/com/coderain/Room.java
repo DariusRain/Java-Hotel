@@ -5,12 +5,43 @@ public class Room {
     private int floor;
     private int averagePrice;
     private String type;
-//    private CLient occupant;
+    private Client occupant;
     private boolean isOccupied;
     private boolean needsCleaning;
-//    reserve()
-//    checkout()
-//    clean()
+
+    public Room(int number, int floor, int averagePrice, String type, Client occupant, boolean isOccupied, boolean needsCleaning) {
+        this.number = number;
+        this.floor = floor;
+        this.averagePrice = averagePrice;
+        this.type = type;
+        this.occupant = occupant;
+        this.isOccupied = isOccupied;
+        this.needsCleaning = needsCleaning;
+    }
+
+    public boolean reserve(Client occupant) {
+        if (needsCleaning == false && isOccupied == false) {
+            this.occupant = occupant;
+            isOccupied = true;
+            return true;
+        }
+        return false;
+    }
+
+    public void checkout() {
+        occupant = null;
+        isOccupied = false;
+        needsCleaning = true;
+    }
+
+    public void clean() {
+        needsCleaning = false;
+    }
+
+    public Client getOccupant() {
+        return occupant;
+    }
+
 }
 
 
