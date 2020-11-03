@@ -1,19 +1,23 @@
-package com.coderain;
+package hotel.rooms;
 
-public class Room {
+import hotel.Client;
+
+public class StandardRoom extends Room {
+
     private int number;
     private int floor;
     private int averagePrice;
-    private String type;
+    private int rooms;
+    private int beds;
+    private RoomTypes type = RoomTypes.STANDARD;
     private Client occupant;
     private boolean isOccupied;
     private boolean needsCleaning;
 
-    public Room(int number, int floor, int averagePrice, String type, Client occupant, boolean isOccupied, boolean needsCleaning) {
+    public Room(int number, int floor, int averagePrice, RoomTypes type, Client occupant, boolean isOccupied, boolean needsCleaning) {
         this.number = number;
         this.floor = floor;
         this.averagePrice = averagePrice;
-        this.type = type;
         this.occupant = occupant;
         this.isOccupied = isOccupied;
         this.needsCleaning = needsCleaning;
@@ -25,6 +29,7 @@ public class Room {
             isOccupied = true;
             return true;
         }
+
         return false;
     }
 
@@ -42,19 +47,12 @@ public class Room {
         return occupant;
     }
 
+    protected void setRoomType(RoomTypes type) {
+        this.type = type;
+    }
 }
-
-
-/*
-Room
-    number ex: 102
-    type ex: ’single’
-    floor ex: 3
-    isOccupied: false
-    needsCleaning: false
-    occupant: a Client
-    averagePrice: 38000
-    reserve(): = Should change room to isOccupied and assign the client to the occupant if isOccupied and needsCleaning are false otherwise print “unavailable” Should return true if successful or false if issue.
-    checkout(): Remove the client from object and mark isOccupied as false, set needsCleaning to true, display o outstanding balance for the client.
-    clean(): Set needsCleaning to false
-*/
+//    Extends Room
+//    type = single
+//    hotel.rooms ex 1
+//    beds ex 1
+//    @Override reserve(): If party size > beds * 2 print unavailable otherwise run standard reserve
