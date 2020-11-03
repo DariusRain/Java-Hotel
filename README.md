@@ -17,14 +17,14 @@
 #### &nbsp; StandardRoom extends Room
 * …Room
 * type = single
-* rooms ex 1
+* hotel.rooms ex 1
 * beds ex 1
 * @Override reserve(): If party size > beds * 2 print unavailable otherwise run standard reserve 
 &nbsp;
 
 #### &nbsp; SuiteRoom extends Room
 * type = suite
-* rooms ex 2
+* hotel.rooms ex 2
 * beds example 1
 * kitchenette ex: true
 * needsRestock: false
@@ -48,7 +48,7 @@
 
 #### &nbsp; Hotel class:
 * name ex: Hotel Java
-* rooms: 20
+* hotel.rooms: 20
 * availableStandards: …StandardRooms
 * reservedStandards: …StandardRooms
 * availableSuites: …SuiteRooms
@@ -61,4 +61,4 @@
 
 
 #### Bonus
-Additional challenge add a calculate price method.  This method should increase the price by x% for each person above bed * 2 with a maximum capacity for the room at bed * 2 + room * 2. Example a 1 bed 1 room can take 4 people max with 2 having a fee applied. a 2 bed 2 room has max occupancy of 8 with 4 being subject to fee. A 1 bed 3 room also has 8 occupancy but 6 fees can be applied. The standard room applies a 5% fee and suites apply an 8% fee. Note this means the standard rooms will no longer deny at 2*bed but now deny at 2*bed + 2 * room. While the suite will not deny but if over capacity increase price by additional 50% per person after capacity.
+Additional challenge add a calculate price method.  This method should increase the price by x% for each person above bed * 2 with a maximum capacity for the room at bed * 2 + room * 2. Example a 1 bed 1 room can take 4 people max with 2 having a fee applied. a 2 bed 2 room has max occupancy of 8 with 4 being subject to fee. A 1 bed 3 room also has 8 occupancy but 6 fees can be applied. The standard room applies a 5% fee and suites apply an 8% fee. Note this means the standard hotel.rooms will no longer deny at 2*bed but now deny at 2*bed + 2 * room. While the suite will not deny but if over capacity increase price by additional 50% per person after capacity.

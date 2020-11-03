@@ -1,6 +1,7 @@
-package com.coderain;
+package hotel;
 
 public class Client {
+
     private String name;
     private String phoneNumber;
     private String firstname;
@@ -10,6 +11,7 @@ public class Client {
     private int prepaid;
     private int currentBill;
     private int roomNumber;
+
     public int getPartySize() {return partySize;};
 
     public void makePayment (int payment) {
@@ -29,6 +31,7 @@ public class Client {
     };
 
 }
+
 // Client
 //         name ex: John Doe
 //         partySize: 1
