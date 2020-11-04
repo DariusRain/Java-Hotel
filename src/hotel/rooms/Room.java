@@ -9,8 +9,8 @@ public class Room {
     private int averagePrice;
     private RoomTypes type = RoomTypes.SINGLE;
     private Client occupant;
-    private boolean isOccupied = false;
-    private boolean needsCleaning = false;
+    public boolean isOccupied = false;
+    public boolean needsCleaning = false;
 
     public Room(int number, int floor, int averagePrice) {
         this.number = number;
@@ -43,8 +43,16 @@ public class Room {
         return occupant;
     }
 
-    protected void setRoomType(RoomTypes type) {
+    protected void setType(RoomTypes type) {
         this.type = type;
+    }
+
+    public boolean isAvailable() {
+        return isOccupied && !needsCleaning;
+    }
+
+    public RoomTypes getType() {
+        return type;
     }
 }
 

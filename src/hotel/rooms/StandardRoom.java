@@ -3,8 +3,8 @@ package hotel.rooms;
 import hotel.Client;
 
 public class StandardRoom extends Room {
-    private static int beds = 2;
-    private int rooms = 2;
+    private static int beds = 1;
+    private int rooms = 1;
 
     public StandardRoom(int number, int floor, int averagePrice) {
         super(number, floor, averagePrice);

@@ -11,7 +11,7 @@ public class SuiteRoom extends Room  {
 
     public SuiteRoom(int number, int floor, int averagePrice) {
         super(number, floor, averagePrice);
-        setRoomType(RoomTypes.SUITE);
+        setType(RoomTypes.SUITE);
     }
 
 

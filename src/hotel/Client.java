@@ -1,16 +1,29 @@
 package hotel;
 
+import hotel.rooms.RoomTypes;
+
 public class Client {
 
     private String name;
     private String phoneNumber;
     private String firstname;
     private String lastname;
-    private String roomType;
+    private RoomTypes roomType;
     private int partySize;
-    private int prepaid;
-    private int currentBill;
     private int roomNumber;
+    private int prepaid = 0;
+    private int currentBill = 0;
+
+    public Client(String firstname, String lastname, String phoneNumber, RoomTypes roomType, int partySize, int roomNumber) {
+        name = firstname + " " + lastname;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.roomType = roomType;
+        this.partySize = partySize;
+        this.roomNumber = roomNumber;
+        this.phoneNumber = phoneNumber;
+    }
+
 
     public int getPartySize() {return partySize;};
 
@@ -26,9 +39,14 @@ public class Client {
         return currentBill - prepaid;
     }
 
-    public void setRoomType(String roomType) {
+    public void setRoomType(RoomTypes roomType) {
         this.roomType = roomType;
     };
+    public RoomTypes getRoomType() {return roomType;}
+
+    public int getRoomNumber() {return roomNumber;}
+
+    public String getName() {return name;}
 
 }
 
