@@ -2,23 +2,29 @@ package hotel.rooms;
 
 import hotel.Client;
 
-public class SuiteRoom extends Room {
+public class SuiteRoom extends Room  {
 
     private boolean kitchenette;
     private boolean needsRestock = false;
+    private static int beds = 4;
+    private static int rooms = 3;
 
-    public SuiteRoom(int number, int floor, int averagePrice, RoomTypes type, Client occupant, boolean isOccupied, boolean needsCleaning, int rooms, int beds) {
-        super(number, floor, averagePrice, type, occupant, isOccupied, needsCleaning);
+    public SuiteRoom(int number, int floor, int averagePrice) {
+        super(number, floor, averagePrice);
         setRoomType(RoomTypes.SUITE);
-        this.kitchenette = kitchenette;
     }
 
 
-    public boolean reserve() {
-        if (needsRestock) {
-            super.reserve(getOccupant());
+    public boolean reserve(Client occupant) {
+        if (!needsRestock) {
+            return super.reserve(occupant);
         }
         return false;
+    }
+
+    public void checkout() {
+        needsRestock = true;
+        super.checkout();
     }
 
     public void restock() {
@@ -29,7 +35,7 @@ public class SuiteRoom extends Room {
 
 /*
 type = suite
-hotel.rooms ex 2
+rooms ex 2
 beds example 1
 kitchenette ex: true
 needsRestock: false
