@@ -10,22 +10,21 @@ public class Client {
     private String lastname;
     private RoomTypes roomType;
     private int partySize;
-    private int roomNumber;
+    private int roomNumber = -1;
     private int prepaid = 0;
     private int currentBill = 0;
 
-    public Client(String firstname, String lastname, String phoneNumber, RoomTypes roomType, int partySize, int roomNumber) {
+    public Client(String firstname, String lastname, String phoneNumber, RoomTypes roomType, int partySize) {
         name = firstname + " " + lastname;
         this.firstname = firstname;
         this.lastname = lastname;
         this.roomType = roomType;
         this.partySize = partySize;
-        this.roomNumber = roomNumber;
         this.phoneNumber = phoneNumber;
     }
 
 
-    public int getPartySize() {return partySize;};
+    public int getPartySize() {return partySize;}
 
     public void makePayment (int payment) {
         prepaid += payment;
@@ -39,14 +38,18 @@ public class Client {
         return currentBill - prepaid;
     }
 
+    public void setRoomNumber(int roomNumber) { this.roomNumber = this.roomNumber == -1 ? roomNumber : this.roomNumber; }
+
     public void setRoomType(RoomTypes roomType) {
         this.roomType = roomType;
     };
+
     public RoomTypes getRoomType() {return roomType;}
 
     public int getRoomNumber() {return roomNumber;}
 
     public String getName() {return name;}
+
 
 }
 

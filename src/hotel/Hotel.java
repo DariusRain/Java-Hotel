@@ -1,10 +1,10 @@
 package hotel;
 
-import console.Console;
+import console.HotelConsole;
 import hotel.rooms.Room;
+import hotel.rooms.RoomTypes;
 import hotel.rooms.StandardRoom;
 import hotel.rooms.SuiteRoom;
-import hotel.rooms.RoomTypes;
 import java.util.ArrayList;
 //import java.util.HashMap;
 
@@ -15,7 +15,6 @@ public class Hotel {
 
     private String name;
     private int rooms;
-    private Console console = new Console();
     private ArrayList<StandardRoom> availableStandards = new ArrayList<>();
     private ArrayList<StandardRoom> reservedStandards = new ArrayList<>();
     private ArrayList<SuiteRoom> availableSuites = new ArrayList<>();
@@ -27,6 +26,12 @@ public class Hotel {
         this.rooms = rooms;
     }
 
+    public Hotel(String name, int rooms, int standardRoomAvgPrice, int suiteRoomAvgPrice) {
+        this.name = name;
+        this.rooms = rooms;
+        this.standardRoomAvgPrice = standardRoomAvgPrice;
+        this.suiteRoomAvgPrice = suiteRoomAvgPrice;
+    }
 
     public void addRoom(RoomTypes type) {
 
@@ -34,70 +39,65 @@ public class Hotel {
         int floor = (int)Math.floor(roomNumber * .1);
 
         if (roomNumber < 0) {
-            console.log("Cannot add more rooms");
+            HotelConsole.alert("Reached desired max room capacity: " + rooms + " rooms are now added!");
             return;
         }
 
         switch (type) {
 
             case SINGLE:
-                console.log("Adding standard room...");
                 availableStandards.add(new StandardRoom(roomNumber, floor, standardRoomAvgPrice));
                 break;
 
             case SUITE:
-                console.log("Adding a suite room...");
-                availableSuites.add(new SuiteRoom(roomNumber, floor, suiteRoomAvgPrice));
+                availableSuites.add(new SuiteRoom(roomNumber, floor, suiteRoomAvgPrice, roomNumber % 2 == 0 ? true : false));
                 break;
 
             default:
-                console.log("Invalid room type " + type);
+                HotelConsole.invalid("" + type);
                 break;
         }
 
     }
 
 
-    public void reserveRoom(Client client) {
-        switch (client.getRoomType()) {
+
+    public int reserveRoom(Client client) {
+
+        int roomNumber = -1;
+        RoomTypes type = client.getRoomType();
+        String typeToString = type.toString().toLowerCase();
+        HotelConsole.attempt("reserve " + typeToString + " room");
+
+        switch (type) {
 
             case SINGLE:
-                console.log("Reserving standard..");
-
-                if (availableStandards.size() > 0) {
-
-                    availableStandards.get(0).reserve(client);
-                    reservedStandards.add(availableStandards.get(0));
-                    availableStandards.remove(availableStandards.get(0));
-                    clients.add(client);
-
-                } else {
-
-                    console.log("No standard rooms available...");
-
+                if (availableStandards.size() > 0 && availableStandards.get(0).reserve(client)) {
+                        client.setRoomNumber(availableStandards.get(0).getNumber());
+                        clients.add(client);
+                        reservedStandards.add(availableStandards.get(0));
+                        availableStandards.remove(availableStandards.get(0));
                 }
                 break;
 
             case SUITE:
-                console.log("Reserving suite...");
-                if (availableSuites.size() > 0) {
-
-                    availableSuites.get(0).reserve(client);
+                if (availableSuites.size() > 0 && availableSuites.get(0).reserve(client)) {
                     reservedSuites.add(availableSuites.get(0));
                     availableStandards.remove(availableStandards.get(0));
                     clients.add(client);
-
-                } else {
-
-                    console.log("No suite rooms available...");
-
                 }
                 break;
 
             default:
-                console.log("Invalid room type " + client.getRoomType());
+                HotelConsole.invalid( "" + type);
                 break;
         }
+
+        if (roomNumber < 0 ) {
+            HotelConsole.unavailable("No " + typeToString + " rooms available...");
+        }
+
+        return roomNumber;
 
     }
 
@@ -145,13 +145,17 @@ public class Hotel {
 
 
     public void initialize(int percentage) {
+
         int nOfStandards = (int)(rooms * (percentage * .01));
         int nOfSuites = rooms - nOfStandards;
         int counter = 0;
+
         while(counter++ < nOfStandards + nOfSuites) {
                 addRoom( counter < nOfStandards ? RoomTypes.SINGLE : RoomTypes.SUITE);
         }
+
     }
+
 
 
 }

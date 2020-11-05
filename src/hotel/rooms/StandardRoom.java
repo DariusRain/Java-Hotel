@@ -3,6 +3,7 @@ package hotel.rooms;
 import hotel.Client;
 
 public class StandardRoom extends Room {
+
     private static int beds = 1;
     private int rooms = 1;
 
@@ -15,7 +16,6 @@ public class StandardRoom extends Room {
         if (getOccupant().getPartySize() > beds * 2) {
             super.reserve(occupant);
         }
-
         return false;
     }
 

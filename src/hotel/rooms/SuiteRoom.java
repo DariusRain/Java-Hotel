@@ -4,13 +4,16 @@ import hotel.Client;
 
 public class SuiteRoom extends Room  {
 
+
     private boolean kitchenette;
     private boolean needsRestock = false;
     private static int beds = 4;
     private static int rooms = 3;
 
-    public SuiteRoom(int number, int floor, int averagePrice) {
+
+    public SuiteRoom(int number, int floor, int averagePrice, boolean kitchenette) {
         super(number, floor, averagePrice);
+        this.kitchenette = kitchenette;
         setType(RoomTypes.SUITE);
     }
 
@@ -22,14 +25,17 @@ public class SuiteRoom extends Room  {
         return false;
     }
 
+
     public void checkout() {
         needsRestock = true;
         super.checkout();
     }
 
+
     public void restock() {
         needsRestock = false;
     }
+
 
 }
 

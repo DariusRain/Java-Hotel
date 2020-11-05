@@ -1,3 +1,4 @@
+// Unused example of interface
 package hotel.rooms;
 
 import hotel.Client;
