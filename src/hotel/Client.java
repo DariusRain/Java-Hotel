@@ -1,18 +1,31 @@
 package hotel;
 
+import console.HotelConsole;
+import hotel.rooms.RoomTypes;
+
 public class Client {
 
     private String name;
     private String phoneNumber;
     private String firstname;
     private String lastname;
-    private String roomType;
+    private RoomTypes roomType;
     private int partySize;
-    private int prepaid;
-    private int currentBill;
-    private int roomNumber;
+    private int roomNumber = -1;
+    private int prepaid = 0;
+    private int currentBill = 0;
 
-    public int getPartySize() {return partySize;};
+    public Client(String firstname, String lastname, String phoneNumber, RoomTypes roomType, int partySize) {
+        name = firstname + " " + lastname;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.roomType = roomType;
+        this.partySize = partySize;
+        this.phoneNumber = phoneNumber;
+    }
+
+
+    public int getPartySize() {return partySize;}
 
     public void makePayment (int payment) {
         prepaid += payment;
@@ -26,9 +39,21 @@ public class Client {
         return currentBill - prepaid;
     }
 
-    public void setRoomType(String roomType) {
+    public void setRoomNumber(int roomNumber) {
+        HotelConsole.log((this.roomNumber == -1 ? roomNumber : this.roomNumber) + "");
+        //        this.roomNumber = this.roomNumber == -1 ? roomNumber : this.roomNumber;
+    }
+
+    public void setRoomType(RoomTypes roomType) {
         this.roomType = roomType;
     };
+
+    public RoomTypes getRoomType() {return roomType;}
+
+    public int getRoomNumber() {return roomNumber;}
+
+    public String getName() {return name;}
+
 
 }
 
