@@ -25,6 +25,7 @@ public class Room {
 
         if (needsCleaning == false && isOccupied == false) {
 
+            occupant.setRoomNumber(number);
             this.occupant = occupant;
             isOccupied = true;
             return true;

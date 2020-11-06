@@ -1,5 +1,6 @@
 package hotel;
 
+import console.HotelConsole;
 import hotel.rooms.RoomTypes;
 
 public class Client {
@@ -38,7 +39,10 @@ public class Client {
         return currentBill - prepaid;
     }
 
-    public void setRoomNumber(int roomNumber) { this.roomNumber = this.roomNumber == -1 ? roomNumber : this.roomNumber; }
+    public void setRoomNumber(int roomNumber) {
+        HotelConsole.log((this.roomNumber == -1 ? roomNumber : this.roomNumber) + "");
+        //        this.roomNumber = this.roomNumber == -1 ? roomNumber : this.roomNumber;
+    }
 
     public void setRoomType(RoomTypes roomType) {
         this.roomType = roomType;

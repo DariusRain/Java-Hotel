@@ -50,7 +50,8 @@ public class Hotel {
                 break;
 
             case SUITE:
-                availableSuites.add(new SuiteRoom(roomNumber, floor, suiteRoomAvgPrice, roomNumber % 2 == 0 ? true : false));
+                boolean kitchenette = roomNumber % 2 == 0 ? true : false;
+                availableSuites.add(new SuiteRoom(roomNumber, floor, suiteRoomAvgPrice, kitchenette));
                 break;
 
             default:
@@ -60,62 +61,133 @@ public class Hotel {
 
     }
 
+//    public
 
+    public int findRoom(RoomTypes type, int roomNumber) {
+        int indexCount = 0;
+        for (Room room: type == RoomTypes.SINGLE ? reservedStandards : reservedSuites) {
 
-    public int reserveRoom(Client client) {
+            if (room.getNumber() == roomNumber) {
+                return indexCount;
+            }
 
-        int roomNumber = -1;
-        RoomTypes type = client.getRoomType();
+            indexCount += 1;
+        }
+
+        return indexCount;
+
+    }
+// https://stackoverflow.com/questions/450807/how-do-i-make-the-method-return-type-generic
+//    public <G> G reserveRoom(Client client) {
+//
+//        RoomTypes type = client.getRoomType();
+//        String typeToString = type.toString().toLowerCase();
+//        HotelConsole.attempt("reserve " + typeToString + " room...");
+//        G anyRoom = (G)null;
+//        switch (type) {
+//
+//            case SINGLE:
+//            case SUITE:
+//                System.out.println(availableStandards.size() + " " + availableStandards.get(0).getNumber());
+//                System.out.println(availableStandards.size() > 0 && availableStandards.get(0).reserve(client));
+//                if (availableStandards.size() > 0 && availableStandards.get(0).reserve(client)) {
+//                        StandardRoom selected = availableStandards.get(0);
+//                        anyRoom = (G)(selected);
+//                        client.setRoomNumber(selected.getNumber());
+//                        clients.add(client);
+//                        reservedStandards.add(availableStandards.get(0));
+//                        availableStandards.remove(availableStandards.get(0));
+//                }
+//                break;
+//
+//                System.out.println(availableSuites.size() + " " + availableSuites.get(0).getNumber());
+//                System.out.println(availableSuites.size() > 0 && availableSuites.get(0).reserve(client));
+//                if (availableSuites.size() > 0 && availableSuites.get(0).reserve(client)) {
+//                    client.setRoomNumber();
+//                    reservedSuites.add(availableSuites.get(0));
+//                    availableStandards.remove(availableStandards.get(0));
+//                    clients.add(client);
+//                }
+//                break;
+//
+//            default:
+//                HotelConsole.invalid( "" + type);
+//                break;
+//        }
+//
+//
+//
+//        return anyRoom;
+//
+//    }
+    
+//    public <>
+
+    public <AnyRoom, CollectionAvailable, CollectionReserved> AnyRoom reserveRoom(Client occupant) {
+
+        RoomTypes type = occupant.getRoomType();
         String typeToString = type.toString().toLowerCase();
-        HotelConsole.attempt("reserve " + typeToString + " room");
+        HotelConsole.attempt("reserve " + typeToString + " room...");
+        ArrayList<? extends Room> listOfRoomsAvailable = (ArrayList<? extends Room>) (type == RoomTypes.SINGLE ? availableStandards : type == RoomTypes.SUITE ? availableSuites : null);
+        ArrayList<? extends Room> listOfRoomsReserved = (ArrayList<? extends Room>) (type == RoomTypes.SINGLE ? reservedStandards : type == RoomTypes.SUITE ? reservedSuites : null);
 
-        switch (type) {
-
-            case SINGLE:
-                if (availableStandards.size() > 0 && availableStandards.get(0).reserve(client)) {
-                        client.setRoomNumber(availableStandards.get(0).getNumber());
-                        clients.add(client);
-                        reservedStandards.add(availableStandards.get(0));
-                        availableStandards.remove(availableStandards.get(0));
-                }
-                break;
-
-            case SUITE:
-                if (availableSuites.size() > 0 && availableSuites.get(0).reserve(client)) {
-                    reservedSuites.add(availableSuites.get(0));
-                    availableStandards.remove(availableStandards.get(0));
-                    clients.add(client);
-                }
-                break;
-
-            default:
-                HotelConsole.invalid( "" + type);
-                break;
+        if(listOfRoomsAvailable == null) {
+            return (AnyRoom)null;
         }
 
-        if (roomNumber < 0 ) {
-            HotelConsole.unavailable("No " + typeToString + " rooms available...");
+//        collection = (AnyCollection)(collection instanceof ArrayList ? (ArrayList<?>)collection : null);
+        boolean isRoomAvailable = ( ( ArrayList<? extends Room> ) listOfRoomsAvailable ).size() > 0;
+        boolean isRoomReservable = ( ( ArrayList<? extends Room> ) listOfRoomsAvailable ).get(0).reserve(occupant);
+
+
+
+        if (isRoomAvailable && isRoomReservable) {
+
+            Class<? extends Room> room = (Class<? extends Room>)((( ( ArrayList<? extends Room> ) listOfRoomsAvailable )).get(0);
+            clients.add(occupant);
+            listOfRoomsReserved.add(room);
+            availableStandards.remove(availableStandards.get(0));
+
         }
 
-        return roomNumber;
+            if (availableSuites.size() > 0 && availableSuites.get(0).reserve(client)) {
+                client.setRoomNumber();
+                reservedSuites.add(availableSuites.get(0));
+                availableStandards.remove(availableStandards.get(0));
+                clients.add(client);
+            }
+
+
+            return anyRoom;
 
     }
 
-
-
-    public < Generic extends Room > void checkoutRoom(Generic room) {
-
-        room.checkout();
-
-        if (room.getType() == RoomTypes.SINGLE) {
-            availableStandards.add( (StandardRoom) room);
+    public <G> void checkoutRoom(G room) {
+        boolean success = false;
+        if (room instanceof StandardRoom) {
+            ((StandardRoom)(room)).checkout();
+            success = true;
         }
-
-        if (room.getType() == RoomTypes.SUITE) {
-            availableSuites.add( (SuiteRoom) room);
+        if (room instanceof SuiteRoom) {
+            ((SuiteRoom)(room)).checkout();
+            success = true;
+        }
+        if (!success) {
+            HotelConsole.error("Cannot checkout room...");
+        } else {
+            HotelConsole.success("Checkout completed!");
         }
 
     }
+//    public void checkoutRoom(RoomTypes type, int index) {
+//        if (type == RoomTypes.SINGLE) {
+//            reservedStandards.get(index).checkout();
+//        }
+//
+//        room.checkout();
+//        availableStandards.add(room);
+//
+//    }
 
     public int getClientBalance(int roomNumber) {
 
@@ -151,6 +223,7 @@ public class Hotel {
         int counter = 0;
 
         while(counter++ < nOfStandards + nOfSuites) {
+            HotelConsole.log(counter + "");
                 addRoom( counter < nOfStandards ? RoomTypes.SINGLE : RoomTypes.SUITE);
         }
 

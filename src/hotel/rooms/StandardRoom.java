@@ -1,5 +1,6 @@
 package hotel.rooms;
 
+import console.HotelConsole;
 import hotel.Client;
 
 public class StandardRoom extends Room {
@@ -12,11 +13,12 @@ public class StandardRoom extends Room {
     }
 
 
-    public boolean reserve(Client occupant) {
-        if (getOccupant().getPartySize() > beds * 2) {
-            super.reserve(occupant);
+    public boolean reserve(Client client) {
+        if (client.getPartySize() > beds * 2) {
+            HotelConsole.unavailable(client.getRoomType().toString().toLowerCase());
+            return false;
         }
-        return false;
+            return super.reserve(client);
     }
 
 //    public void restock() {
