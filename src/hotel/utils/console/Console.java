@@ -1,4 +1,4 @@
-package console;
+package hotel.utils.console;
 import java.util.Scanner;
 
 // In charge of inputting & outputting to the user.

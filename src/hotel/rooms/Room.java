@@ -1,6 +1,6 @@
 package hotel.rooms;
 
-import console.HotelConsole;
+import hotel.utils.console.HotelConsole;
 import hotel.Client;
 
 public class Room {
@@ -8,7 +8,7 @@ public class Room {
     private int number;
     private int floor;
     private int averagePrice;
-    private RoomTypes type = RoomTypes.SINGLE;
+    private Types type = Types.SINGLE;
     private Client occupant;
     public boolean isOccupied = false;
     public boolean needsCleaning = false;
@@ -53,7 +53,7 @@ public class Room {
         return occupant;
     }
 
-    protected void setType(RoomTypes type) {
+    protected void setType(Types type) {
         this.type = type;
     }
 
@@ -61,7 +61,7 @@ public class Room {
 //        return isOccupied && !needsCleaning;
 //    }
 
-    public RoomTypes getType() {
+    public Types getType() {
         return type;
     }
 

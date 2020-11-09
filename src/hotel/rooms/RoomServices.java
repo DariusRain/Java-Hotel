@@ -22,6 +22,6 @@ public interface RoomServices {
 
     public Client getOccupant();
 
-    public void setRoomType(RoomTypes type);
+    public void setRoomType(Types type);
 }
 

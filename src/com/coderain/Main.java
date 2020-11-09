@@ -1,5 +1,5 @@
 package com.coderain;
-import console.HotelConsole;
+import hotel.utils.console.HotelConsole;
 import hotel.*;
 import hotel.rooms.*;
 public class Main {
@@ -9,18 +9,16 @@ public class Main {
 	    // write your code here
         Hotel marriot = new Hotel("Marriot", 300);
         marriot.initialize(70);
-        Client darius = new Client("Darius", "Rain", "4120985674", RoomTypes.SINGLE, 1);
+        Client darius = new Client("Darius", "Rain", "4120985674", Types.SINGLE, 1);
 
         // Checking in
-        int roomNumber = marriot.reserveRoom(darius);
-        HotelConsole.log("My room number: " + roomNumber);
+        Standard reservedRoom = marriot.reserveStandardRoom(darius);
+        HotelConsole.log("My room number: " + reservedRoom.getNumber());
 
         // Checking out
-        int indexOfMyRoom = marriot.findRoom(darius.getRoomType(), darius.getRoomNumber());
+        //  int indexOfMyRoom = marriot.findRoom(darius.getRoomType(), darius.getRoomNumber());
+          marriot.checkoutRoom(reservedRoom);
 
-        //
-        HotelConsole.log(indexOfMyRoom + "");
-//        marriot.checkoutRoom(indexOfMyRoom);
     }
 
 }

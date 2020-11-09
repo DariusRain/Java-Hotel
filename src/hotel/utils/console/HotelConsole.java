@@ -1,4 +1,4 @@
-package console;
+package hotel.utils.console;
 
 public class HotelConsole extends Console {
 

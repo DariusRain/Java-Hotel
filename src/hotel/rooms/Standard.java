@@ -1,14 +1,14 @@
 package hotel.rooms;
 
-import console.HotelConsole;
+import hotel.utils.console.HotelConsole;
 import hotel.Client;
 
-public class StandardRoom extends Room {
+public class Standard extends Room {
 
     private static int beds = 1;
     private int rooms = 1;
 
-    public StandardRoom(int number, int floor, int averagePrice) {
+    public Standard(int number, int floor, int averagePrice) {
         super(number, floor, averagePrice);
     }
 

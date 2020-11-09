@@ -1,6 +1,6 @@
 package hotel.rooms;
 
-public enum RoomTypes {
+public enum Types {
     SINGLE,
     SUITE,
 //    STANDARD,

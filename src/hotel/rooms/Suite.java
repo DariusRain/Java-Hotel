@@ -2,7 +2,7 @@ package hotel.rooms;
 
 import hotel.Client;
 
-public class SuiteRoom extends Room  {
+public class Suite extends Room  {
 
 
     private boolean kitchenette;
@@ -11,10 +11,10 @@ public class SuiteRoom extends Room  {
     private static int rooms = 3;
 
 
-    public SuiteRoom(int number, int floor, int averagePrice, boolean kitchenette) {
+    public Suite(int number, int floor, int averagePrice, boolean kitchenette) {
         super(number, floor, averagePrice);
         this.kitchenette = kitchenette;
-        setType(RoomTypes.SUITE);
+        setType(Types.SUITE);
     }
 
 
