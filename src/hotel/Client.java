@@ -1,7 +1,7 @@
 package hotel;
 
-import console.HotelConsole;
-import hotel.rooms.RoomTypes;
+import hotel.utils.console.HotelConsole;
+import hotel.rooms.Types;
 
 public class Client {
 
@@ -9,13 +9,13 @@ public class Client {
     private String phoneNumber;
     private String firstname;
     private String lastname;
-    private RoomTypes roomType;
+    private Types roomType;
     private int partySize;
     private int roomNumber = -1;
     private int prepaid = 0;
     private int currentBill = 0;
 
-    public Client(String firstname, String lastname, String phoneNumber, RoomTypes roomType, int partySize) {
+    public Client(String firstname, String lastname, String phoneNumber, Types roomType, int partySize) {
         name = firstname + " " + lastname;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -44,11 +44,11 @@ public class Client {
         //        this.roomNumber = this.roomNumber == -1 ? roomNumber : this.roomNumber;
     }
 
-    public void setRoomType(RoomTypes roomType) {
+    public void setRoomType(Types roomType) {
         this.roomType = roomType;
     };
 
-    public RoomTypes getRoomType() {return roomType;}
+    public Types getRoomType() {return roomType;}
 
     public int getRoomNumber() {return roomNumber;}
 
