@@ -103,7 +103,7 @@ public class Hotel {
         return new Suite(-1, -1, -1, false);
     }
 
-
+// Thought I could do an approach like this (ALMOST HAD IT)
 //    public <Any> Any reserveRoom(Client occupant) {
 //        for (var room: (Parser.genericToList(Parser.getListChoice(occupant.getRoomType(), availableStandards, availableSuites))) ) {
 //            if (room.reserve(occupant)) {
@@ -145,31 +145,31 @@ public class Hotel {
 //    }
 
     public <G> void checkoutRoom(G room) {
+
         boolean success = false;
+
         if (room instanceof Standard) {
             ((Standard)(room)).checkout();
+            reservedStandards.remove(room);
+            availableStandards.add((Standard) room);
             success = true;
         }
+
         if (room instanceof Suite) {
             ((Suite)(room)).checkout();
+            reservedSuites.remove(room);
+            availableSuites.add((Suite) room);
             success = true;
         }
+
         if (!success) {
             HotelConsole.error("Cannot checkout room...");
-        } else {
+        }
+        else {
             HotelConsole.success("Checkout completed!");
         }
 
     }
-//    public void checkoutRoom(RoomTypes type, int index) {
-//        if (type == RoomTypes.SINGLE) {
-//            reservedStandards.get(index).checkout();
-//        }
-//
-//        room.checkout();
-//        availableStandards.add(room);
-//
-//    }
 
     public int getClientBalance(int roomNumber) {
 
