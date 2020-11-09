@@ -17,11 +17,8 @@ public class Main {
 
         // Checking out
         //  int indexOfMyRoom = marriot.findRoom(darius.getRoomType(), darius.getRoomNumber());
-          reservedRoom.checkout();
           marriot.checkoutRoom(reservedRoom);
-        //
-        HotelConsole.log();
-//        marriot.checkoutRoom(indexOfMyRoom);
+
     }
 
 }

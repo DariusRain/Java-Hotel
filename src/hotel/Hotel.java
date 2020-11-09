@@ -103,7 +103,7 @@ public class Hotel {
         return new Suite(-1, -1, -1, false);
     }
 
-// Thought I could do an approach like this (ALMOST HAD IT)
+// Thought I could do an approach (ALMOST HAD IT)
 //    public <Any> Any reserveRoom(Client occupant) {
 //        for (var room: (Parser.genericToList(Parser.getListChoice(occupant.getRoomType(), availableStandards, availableSuites))) ) {
 //            if (room.reserve(occupant)) {
