@@ -92,7 +92,7 @@ public class Hotel {
         return new Standard(-1, -1, -1);
     }
 
-    public Suite reserveSuiteRoom(Client occupant, boolean overrider) {
+    public Suite reserveSuiteRoom(Client occupant) {
         for (Suite room: availableSuites) {
             if(room.reserve(occupant)) {
                 reservedSuites.add(room);
@@ -205,8 +205,7 @@ public class Hotel {
         int counter = 0;
 
         while(counter++ < nOfStandards + nOfSuites) {
-            HotelConsole.log(counter + "");
-                addRoom( counter < nOfStandards ? Types.SINGLE : Types.SUITE);
+            addRoom( counter < nOfStandards ? Types.SINGLE : Types.SUITE);
         }
 
     }

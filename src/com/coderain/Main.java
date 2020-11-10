@@ -9,16 +9,21 @@ public class Main {
 	    // write your code here
         Hotel marriot = new Hotel("Marriot", 300);
         marriot.initialize(70);
-        Client darius = new Client("Darius", "Rain", "4120985674", Types.SINGLE, 1);
+        Client person1 = new Client("Darius", "Rain", "4120985674", Types.SINGLE, 1);
+        Client person2 = new Client("Darius", "Rain", "4120985674", Types.SUITE, 1);
 
         // Checking in
-        Standard reservedRoom = marriot.reserveStandardRoom(darius);
-        HotelConsole.log("My room number: " + reservedRoom.getNumber());
+        Standard reservedRoom1 = marriot.reserveStandardRoom(person1);
+        Suite reservedRoom2 = marriot.reserveSuiteRoom(person2);
+
+        HotelConsole.log("Persoon 1 room number: " + reservedRoom1.getNumber());
+        HotelConsole.log("Persoon 2 room number: " + reservedRoom2.getNumber());
 
         // Checking out
-        //  int indexOfMyRoom = marriot.findRoom(darius.getRoomType(), darius.getRoomNumber());
-          marriot.checkoutRoom(reservedRoom);
+          marriot.checkoutRoom(reservedRoom1);
+          marriot.checkoutRoom(reservedRoom2);
 
     }
 
 }
+
